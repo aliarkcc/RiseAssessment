@@ -32,16 +32,9 @@ namespace WebAPI.Controllers
         }
         [HttpGet]
         [Route("[action]/{id:int}")]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-        //    var result = await _contactInfoService.GetByIdAsync(id);
-        //    if (result != null)
-        //        return Ok(result);
-        //    return BadRequest();
-        //}
-        public IActionResult GetByIdDetails(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result =  _contactInfoService.GetDirectoryDetailDto(id);
+            var result = await _contactInfoService.GetByIdAsync(id);
             if (result != null)
                 return Ok(result);
             return BadRequest();
