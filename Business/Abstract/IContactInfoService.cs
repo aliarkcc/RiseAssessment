@@ -13,5 +13,7 @@ namespace Business.Abstract
         Task<IEnumerable<ContactInfo>> GetListAsync();
         Task<ContactInfo> UpdateAsync(ContactInfo contactInfo);
         List<ContactInfoDto> GetDirectoryDetailDto(int id);
+        List<ContactLocationDescDto> GetContactDesc();
+        List<ContactLocationDescDto> GetDirectoryCountToLocation();
     }
 }

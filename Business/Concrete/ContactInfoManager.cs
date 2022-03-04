@@ -10,7 +10,6 @@ namespace Business.Concrete
     public class ContactInfoManager : IContactInfoService
     {
         IContactInfoDal _contactInfoDal;
-
         public ContactInfoManager(IContactInfoDal contactInfoDal)
         {
             _contactInfoDal = contactInfoDal;
@@ -28,7 +27,7 @@ namespace Business.Concrete
 
         public async Task<ContactInfo> GetByIdAsync(int id)
         {
-            return await _contactInfoDal.GetAsync(x => x.DirectoryId == id);
+            return await _contactInfoDal.GetAsync(x => x.Id == id);
         }
 
         public List<ContactInfoDto> GetDirectoryDetailDto(int id)
@@ -44,6 +43,33 @@ namespace Business.Concrete
         public async Task<ContactInfo> UpdateAsync(ContactInfo contactInfo)
         {
             return await _contactInfoDal.UpdateAsync(contactInfo);
+        }
+        public List<ContactLocationDescDto> GetContactDesc()
+        {
+            List<ContactLocationDescDto> newResult = new List<ContactLocationDescDto>();
+            var result= _contactInfoDal.GetContactDesc();
+            foreach (var item in result)
+            {
+                if (item.Name != null)
+                {
+                    newResult.Add(item);
+                }
+            }
+            return newResult;
+        }
+
+        public List<ContactLocationDescDto> GetDirectoryCountToLocation()
+        {
+            List<ContactLocationDescDto> newResult = new List<ContactLocationDescDto>();
+            var result = _contactInfoDal.GetDirectoryCountToLocation();
+            foreach (var item in result)
+            {
+                if (item.Name != null)
+                {
+                    newResult.Add(item);
+                }
+            }
+            return newResult;
         }
     }
 }
