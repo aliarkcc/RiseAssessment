@@ -2,14 +2,37 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dto;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfContactInfoDal : EfBaseRepository<ContactInfo, Context>, IContactInfoDal
     {
+        public List<ContactLocationDescDto> GetContactDesc()
+        {
+            using (Context db= new Context())
+            {
+                var result = db.ContactInfos
+                   .GroupBy(p => p.Location)
+                   .Select(g => new ContactLocationDescDto { Name = g.Key, Count = g.Count() })
+                   .OrderByDescending(a => a.Count);
+                return result.ToList();
+            }
+        }
+
+        public List<ContactLocationDescDto> GetDirectoryCountToLocation()
+        {
+            using (Context db = new Context())
+            {
+                var result = db.ContactInfos
+                    .GroupBy(x => x.Location)
+                    .Select(g => new ContactLocationDescDto { Name = g.Key, Count = g.Select(x => x.DirectoryId).Distinct().Count() });
+                return result.ToList();
+            }
+        }
+
         public List<ContactInfoDto> GetDirectoryDetailDto(int id)
         {
             using (Context db= new Context())
@@ -35,6 +58,17 @@ namespace DataAccess.Concrete.EntityFramework
                                                  }).ToList()
 
                              };
+                return result.ToList();
+            }
+        }
+
+        public List<ContactLocationDescDto> GetTelNumberCountToLocation()
+        {
+            using (Context db = new Context())
+            {
+                var result = db.ContactInfos
+                    .GroupBy(x => x.Location)
+                    .Select(g => new ContactLocationDescDto { Name = g.Key, Count = g.Select(x => x.DirectoryId).Distinct().Count()});
                 return result.ToList();
             }
         }

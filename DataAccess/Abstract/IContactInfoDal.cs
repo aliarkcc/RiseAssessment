@@ -9,5 +9,8 @@ namespace DataAccess.Abstract
     public interface IContactInfoDal:IBaseRepository<ContactInfo>
     {
         List<ContactInfoDto> GetDirectoryDetailDto(int id);
+        List<ContactLocationDescDto> GetContactDesc();
+        List<ContactLocationDescDto> GetDirectoryCountToLocation();
+        List<ContactLocationDescDto> GetTelNumberCountToLocation();
     }
 }
