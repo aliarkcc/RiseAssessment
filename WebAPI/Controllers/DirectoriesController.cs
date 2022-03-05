@@ -1,6 +1,4 @@
 ﻿using Business.Abstract;
-using Core.CrossCuttingConcerns.Caching;
-using Core.CrossCuttingConcerns.Caching.Redis;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +13,6 @@ namespace WebAPI.Controllers
     [ApiController]
     public class DirectoriesController : ControllerBase
     {
-        ICacheService _cacheService;
         IDirectoryService _directoryService;
 
         public DirectoriesController(IDirectoryService directoryService)

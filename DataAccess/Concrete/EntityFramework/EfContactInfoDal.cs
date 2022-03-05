@@ -33,7 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<ContactInfoDto> GetDirectoryDetailDto(int id)
+        public ContactInfoDto GetDirectoryDetailDto(int id)
         {
             using (Context db= new Context())
             {
@@ -58,7 +58,7 @@ namespace DataAccess.Concrete.EntityFramework
                                                  }).ToList()
 
                              };
-                return result.ToList();
+                return result.FirstOrDefault();
             }
         }
 

@@ -1,0 +1,48 @@
+﻿@model Entities.Dto.ContactInfoDto
+@{
+    ViewData["Title"] = "GetDirectoryDetailDto";
+}
+
+<h1>Detaylı Kişi Listesi</h1>
+
+<a class="btn btn-primary mb-3" asp-controller="Directory" asp-action="Index">Ana Sayfaya Dön</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Kişi Id</td>
+            <td>İsim</td>
+            <td>Soyisim</td>
+            <td>Şirket</td>
+            <td>ASd</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.DirectoryId</td>
+            <td>@Model.Name</td>
+            <td>@Model.Surname</td>
+            <td>@Model.Company</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table table-bordered">
+    <thead>
+        <tr>Telefon Numarası</tr>
+        <tr>Mail Adresi</tr>
+        <tr>Konumu</tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ContactInfos)
+        {
+            <tr>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Email</td>
+                <td>@item.Location</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id"class="badge badge-success">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="badge badge-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
